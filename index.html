@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Study Helper – Created by Ravi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05070f;--card:rgba(255,255,255,.06);--line:rgba(255,255,255,.13);--txt:#eef2ff;--mut:#9aa4c7;--a1:#6366f1;--a2:#22d3ee;--a3:#a855f7;--ok:#10b981;--bad:#ef4444}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;animation:fl 16s ease-in-out infinite alternate}
+.bg i:nth-child(1){width:380px;height:380px;background:var(--a1);top:-120px;left:-100px}
+.bg i:nth-child(2){width:320px;height:320px;background:var(--a2);top:35%;right:-120px;animation-delay:-5s}
+.bg i:nth-child(3){width:340px;height:340px;background:var(--a3);bottom:-120px;left:15%;animation-delay:-9s}
+.bg:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:46px 46px;-webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 70%);mask-image:radial-gradient(circle at 50% 30%,#000,transparent 70%)}
+@keyframes fl{to{transform:translate(60px,80px) scale(1.2)}}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.97) translateY(8px)}to{opacity:1;transform:none}}
+@keyframes sp{to{transform:rotate(360deg)}}
+@keyframes gr{to{background-position:200% center}}
+@keyframes sh{to{transform:translateX(120%)}}
+@keyframes pl{0%,100%{box-shadow:0 0 0 0 rgba(99,102,241,.5)}50%{box-shadow:0 0 0 8px rgba(99,102,241,0)}}
+.wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:26px 16px 44px}
+.hero{text-align:center;padding:14px 0 6px;animation:rise .7s both}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:7px 15px;border-radius:99px;background:rgba(99,102,241,.18);color:#c7d2fe;border:1px solid rgba(99,102,241,.45);animation:pl 2.4s infinite}
+h1{font:800 clamp(30px,7vw,46px)/1.15 'Space Grotesk',Inter,sans-serif;margin:14px 0 8px;letter-spacing:-.5px}
+h1 span{background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3),var(--a1));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gr 5s linear infinite}
+.sub{color:var(--mut);font-size:15px;margin:0}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;background:var(--card);border:1px solid var(--line);padding:6px;border-radius:18px;margin:22px 0;backdrop-filter:blur(12px);animation:rise .7s .1s both}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:1;min-width:104px;border:0;background:transparent;color:var(--mut);padding:12px;border-radius:13px;font:600 14px Inter,sans-serif;cursor:pointer;transition:.25s;white-space:nowrap}
+.tabs button:hover{color:#fff;background:rgba(255,255,255,.06)}
+.tabs button.on{background:linear-gradient(135deg,var(--a1),#4f46e5);color:#fff;box-shadow:0 8px 22px rgba(99,102,241,.5);transform:translateY(-1px)}
+.panel{display:none;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;backdrop-filter:blur(14px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+.panel.on{display:block;animation:pop .45s both}
+label.l{display:block;font-size:13px;font-weight:600;color:#c7d2fe;margin:15px 0 6px}
+input,select{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.4);color:var(--txt);font:500 15px Inter,sans-serif;outline:none;transition:.2s}
+input:focus,select:focus{border-color:var(--a2);box-shadow:0 0 0 3px rgba(34,211,238,.2)}
+select option{background:#0d1329;color:#fff}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sr{display:grid;grid-template-columns:36px 1fr 118px;gap:10px;align-items:center;margin-bottom:10px;animation:rise .4s both}
+.num{width:36px;height:36px;border-radius:10px;background:rgba(99,102,241,.25);color:#c7d2fe;display:grid;place-items:center;font-weight:700}
+.btn{position:relative;overflow:hidden;width:100%;margin-top:20px;padding:15px;border:0;border-radius:14px;color:#fff;font:700 16px Inter,sans-serif;cursor:pointer;background:linear-gradient(135deg,var(--a1),#4f46e5 55%,#0891b2);box-shadow:0 10px 26px rgba(79,70,229,.45);transition:.2s}
+.btn:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.25),transparent 70%);transform:translateX(-120%);animation:sh 3s infinite}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn.sec{background:rgba(255,255,255,.08);box-shadow:none;border:1px solid var(--line);margin-top:14px}
+.drop{display:block;border:2px dashed rgba(129,140,248,.55);border-radius:18px;padding:26px 14px;text-align:center;cursor:pointer;background:rgba(99,102,241,.06);transition:.25s}
+.drop:hover{border-color:var(--a2);background:rgba(34,211,238,.08);transform:translateY(-2px)}
+.drop input{display:none}.drop .ic{font-size:38px;display:block}.drop small{display:block;color:var(--mut);margin-top:4px;word-break:break-all}
+.drop img{max-height:120px;max-width:100%;border-radius:10px;margin-top:10px}
+.note{margin-top:10px;font-size:12.5px;font-weight:600;color:#fcd34d;background:rgba(252,211,77,.1);border:1px solid rgba(252,211,77,.35);padding:9px 12px;border-radius:10px;text-align:center}
+.res{margin-top:22px;display:none}.res.show{display:block;animation:rise .5s both}
+.doc{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:16px;padding:16px;line-height:1.7;font-size:15px}
+.dhead{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding-bottom:10px;margin-bottom:8px;border-bottom:1px solid var(--line);font-weight:700}
+.dhead span{color:var(--a2);font-weight:600}
+.doc h2,.doc h3{margin:16px 0 6px;color:#c7d2fe}.doc h2{font-size:19px}.doc h3{font-size:16px}
+.doc p{margin:6px 0}.doc ul{margin:6px 0;padding-left:22px}
+.loader{display:flex;align-items:center;gap:12px;padding:10px}
+.spin{width:22px;height:22px;border-radius:50%;border:3px solid rgba(255,255,255,.15);border-top-color:var(--a2);animation:sp .8s linear infinite}
+.msg{padding:14px;border-radius:12px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.4);color:#fecaca}
+.card{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:15px;margin:12px 0;cursor:pointer;transition:.25s;animation:rise .45s both;animation-delay:calc(var(--i)*40ms)}
+.card:hover{transform:translateY(-2px);border-color:var(--a2)}
+.card .q{font-weight:600}.card .a{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);color:#7dd3fc}
+.card.open .a{display:block;animation:pop .3s both}
+.hint{font-size:12px;color:var(--mut);margin-top:6px}
+.qcard{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0;animation:rise .45s both;animation-delay:calc(var(--i)*40ms)}
+.qcard .q{font-weight:600;margin-bottom:10px}
+.opt{padding:12px 14px;border-radius:12px;border:1px solid var(--line);margin:8px 0;cursor:pointer;background:rgba(255,255,255,.03);transition:.2s}
+.opt:hover{border-color:var(--a2);transform:translateX(3px)}
+.qcard.done .opt{cursor:default;pointer-events:none}
+.opt.correct{background:rgba(16,185,129,.28)!important;border-color:var(--ok)!important;color:#6ee7b7;font-weight:700}
+.opt.wrong{background:rgba(239,68,68,.28)!important;border-color:var(--bad)!important;color:#fca5a5}
+.why{display:none;margin-top:10px;padding:12px;border-radius:10px;background:rgba(34,211,238,.1);color:#a5f3fc;font-size:14px}
+.qcard.done .why{display:block;animation:pop .3s both}
+.res-footer{text-align:center;margin-top:18px;padding-top:12px;border-top:1px solid var(--line);font-weight:700;color:var(--a2)}
+.foot{text-align:center;color:var(--mut);font-size:13px;margin-top:30px}.foot b{color:#fff}
+#err{display:none;position:fixed;top:0;left:0;right:0;z-index:99;background:#7f1d1d;color:#fff;padding:10px;font-size:13px;text-align:center}
+/* PDF style (white, print friendly) */
+.pdf-mode{background:#fff!important;color:#111!important;width:720px;padding:18px;font:14px/1.6 Inter,Arial,sans-serif}
+.pdf-mode *{animation:none!important}
+.pdf-mode .card,.pdf-mode .qcard{background:#f5f6fb!important;border:1px solid #d5d9ea!important;color:#111!important;break-inside:avoid;page-break-inside:avoid}
+.pdf-mode .card .a{display:block!important;color:#0369a1!important;border-top:1px dashed #b8bfd8!important}
+.pdf-mode .opt{background:#fff!important;border:1px solid #d5d9ea!important;color:#111!important}
+.pdf-mode .opt.correct{background:#d1fae5!important;border-color:#10b981!important;color:#065f46!important}
+.pdf-mode .why{display:block!important;background:#e0f7fb!important;color:#0e5a6b!important}
+.pdf-mode .doc{background:#fff!important;border:0!important;padding:0!important}
+.pdf-mode h2,.pdf-mode h3{color:#3730a3!important}.pdf-mode .dhead{border-color:#ccc!important}.pdf-mode .dhead span,.pdf-mode .res-footer{color:#4f46e5!important;border-color:#ccc!important}
+@media(max-width:420px){.sr{grid-template-columns:32px 1fr 104px}.panel{padding:16px}}
+</style>
+</head>
+<body>
+<div id="err"></div>
+<div class="bg"><i></i><i></i><i></i></div>
+<div class="wrap">
+  <div class="hero">
+    <span class="badge">✨ AI Powered • Free</span>
+    <h1>Padhai ko banao <span>Smart</span></h1>
+    <p class="sub">Roadmap, flashcards, quiz, doubt solver aur detailed notes — ek jagah.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="on" data-tab="rm">🗓️ Roadmap</button>
+    <button data-tab="fc">🃏 Flashcards</button>
+    <button data-tab="qz">📝 Quiz</button>
+    <button data-tab="db">🧠 Doubt</button>
+    <button data-tab="sm">📄 Notes</button>
+  </div>
+
+  <!-- ROADMAP -->
+  <div id="p_rm" class="panel on">
+    <label class="l">Tumhara Naam</label><input id="name" placeholder="Jaise: Ravi">
+    <div class="g2">
+      <div><label class="l">Exam me kitne din bache?</label><input id="days" type="number" min="1" placeholder="Jaise: 60"></div>
+      <div><label class="l">Roz kitne ghante padhenge?</label><input id="hours" type="number" min="1" max="18" placeholder="Jaise: 4"></div>
+    </div>
+    <label class="l">Kitne Subjects Hain?</label>
+    <select id="n"><option value="1">1 Subject</option><option value="2">2 Subjects</option><option value="3" selected>3 Subjects</option><option value="4">4 Subjects</option><option value="5">5 Subjects</option><option value="6">6 Subjects</option></select>
+    <label class="l">Subject aur Chapters chunein</label>
+    <div id="subs"></div>
+    <button class="btn" data-go="rm">🚀 Roadmap Banao</button>
+    <div class="res" id="r_rm"><div class="doc" id="d_rm"></div><button class="btn sec dl" data-k="rm">⬇️ PDF Download Karo</button></div>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div id="p_fc" class="panel">
+    <label class="drop"><input id="f_fc" type="file" accept="application/pdf,.pdf"><span class="ic">📄</span><b>PDF Upload Karein</b><small id="nm_fc">Chapter ka PDF select karein</small></label>
+    <div class="note">⚠️ Caution: PDF maximum 3MB tak ki hi upload karein.</div>
+    <div class="g2">
+      <div><label class="l">Kitne Flashcards?</label><select id="cnt_fc"><option>15</option><option>20</option><option>30</option><option>50</option><option>60</option></select></div>
+      <div><label class="l">Bhasha</label><select id="lang_fc"><option>Hinglish</option><option>Hindi</option><option>English</option></select></div>
+    </div>
+    <button class="btn" data-go="fc">⚡ Flashcards Banao</button>
+    <div class="res" id="r_fc"><div class="doc" id="d_fc"></div><button class="btn sec dl" data-k="fc">⬇️ PDF Download Karo</button></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="p_qz" class="panel">
+    <label class="drop"><input id="f_qz" type="file" accept="application/pdf,.pdf"><span class="ic">📑</span><b>Chapter PDF Upload Karein</b><small id="nm_qz">Quiz banane ke liye PDF select karein</small></label>
+    <div class="note">⚠️ Caution: PDF maximum 3MB tak ki hi upload karein.</div>
+    <div class="g2">
+      <div><label class="l">Kitne Sawal?</label><select id="cnt_qz"><option value="10">10 Sawal</option><option value="15">15 Sawal</option><option value="20">20 Sawal</option></select></div>
+      <div><label class="l">Bhasha</label><select id="lang_qz"><option>Hinglish</option><option>Hindi</option><option>English</option></select></div>
+    </div>
+    <button class="btn" data-go="qz">📝 Quiz Banao</button>
+    <div class="res" id="r_qz"><div class="doc" id="d_qz"></div><button class="btn sec dl" data-k="qz">⬇️ PDF Download Karo</button></div>
+  </div>
+
+  <!-- DOUBT -->
+  <div id="p_db" class="panel">
+    <label class="drop"><input id="f_db" type="file" accept="image/*"><span class="ic">📷</span><b>Question ki Photo Upload Karein</b><small id="nm_db">Saaf photo upload karein</small><img id="pv_db" class="hide" style="display:none" alt=""></label>
+    <button class="btn" data-go="db">🧠 Answer Generate Karo</button>
+    <div class="res" id="r_db"><div class="doc" id="d_db"></div><button class="btn sec dl" data-k="db">⬇️ PDF Download Karo</button></div>
+  </div>
+
+  <!-- NOTES -->
+  <div id="p_sm" class="panel">
+    <label class="l">Subject chunein</label>
+    <select id="sub_notes"></select>
+    <label class="l">Topic ka naam likhein</label>
+    <input id="topic_notes" placeholder="Jaise: Newton's Laws of Motion ya Trigonometry">
+    <button class="btn" data-go="sm">📄 Detailed Notes Banao</button>
+    <div class="res" id="r_sm"><div class="doc" id="d_sm"></div><button class="btn sec dl" data-k="sm">⬇️ PDF Download Karo</button></div>
+  </div>
+
+  <div class="foot">Created with ❤️ by <b>Ravi</b></div>
+</div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const SUBJ=["Maths","Science","Chemistry","Physics","Hindi","English","History","Political Science","Geography","Economics"];
+const TITLE={rm:'Study Roadmap',fc:'Flashcards',qz:'Quiz',db:'Doubt Solution',sm:'Detailed Notes'};
+const MAX=3*1024*1024;
+const store={fc:null,qz:null,db:null};
+const esc=t=>String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const opts=(arr)=>arr.map(s=>`<option value="${s}">${s}</option>`).join('');
+
+window.addEventListener('error',e=>{const b=$('#err');b.style.display='block';b.textContent='⚠️ Error: '+e.message});
+
+/* mini markdown -> html */
+function md(t){
+  const inl=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\*(.+?)\*/g,'<i>$1</i>').replace(/`(.+?)`/g,'<code>$1</code>');
+  let out='',ul=false;
+  for(const raw of String(t||'').split('\n')){
+    const l=raw.trim(); let m;
+    if((m=l.match(/^[-*•]\s+(.*)/))||(m=l.match(/^\d+[.)]\s+(.*)/))){ if(!ul){out+='<ul>';ul=true} out+='<li>'+inl(m[1])+'</li>'; continue }
+    if(ul){out+='</ul>';ul=false}
+    if((m=l.match(/^#{1,2}\s+(.*)/))) out+='<h2>'+inl(m[1])+'</h2>';
+    else if((m=l.match(/^#{3,6}\s+(.*)/))) out+='<h3>'+inl(m[1])+'</h3>';
+    else if(l) out+='<p>'+inl(l)+'</p>';
+  }
+  return out+(ul?'</ul>':'');
+}
+
+/* tabs */
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id==='p_'+b.dataset.tab));
+}));
+
+/* roadmap rows */
+$('#sub_notes').innerHTML=opts(["Physics","Chemistry","Maths","Biology","Science","Hindi","English","History","Political Science","Geography","Economics"]);
+const chOpts=Array.from({length:20},(_,i)=>`<option value="${i+1}">${i+1} Chapter${i?'s':''}</option>`).join('');
+function rows(){
+  const n=+$('#n').value,c=$('#subs');c.innerHTML='';
+  for(let i=1;i<=n;i++){
+    const d=document.createElement('div');d.className='sr';d.style.animationDelay=(i*60)+'ms';
+    d.innerHTML=`<div class="num">${i}</div><select class="sn">${opts(SUBJ)}</select><select class="sc">${chOpts}</select>`;
+    c.appendChild(d);
+  }
+}
+$('#n').addEventListener('change',rows);rows();
+
+/* file inputs */
+function fileNote(k){
+  const inp=$('#f_'+k);
+  inp.addEventListener('change',()=>{
+    const f=inp.files[0];if(!f)return;
+    if(f.size>MAX){alert('PDF bahut badi hai ('+(f.size/1048576).toFixed(1)+'MB). Maximum 3MB tak ki PDF upload karein.');inp.value='';store[k]=null;$('#nm_'+k).textContent='Maximum 3MB ki PDF select karein';return}
+    $('#nm_'+k).textContent=f.name+' ('+(f.size/1048576).toFixed(2)+'MB)';
+    const r=new FileReader();r.onload=e=>store[k]=e.target.result;r.readAsDataURL(f);
+  });
+}
+fileNote('fc');fileNote('qz');
+$('#f_db').addEventListener('change',()=>{ /* photo ko chhota (compress) karke bhejte hain */
+  const f=$('#f_db').files[0];if(!f)return;
+  $('#nm_db').textContent=f.name;
+  const img=new Image(),u=URL.createObjectURL(f);
+  img.onload=()=>{
+    const s=Math.min(1,1600/Math.max(img.width,img.height)),c=document.createElement('canvas');
+    c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+    store.db=c.toDataURL('image/jpeg',.85);
+    const p=$('#pv_db');p.src=store.db;p.style.display='inline-block';URL.revokeObjectURL(u);
+  };
+  img.onerror=()=>alert('Ye photo open nahi ho pa rahi. Dusri photo try karein.');
+  img.src=u;
+});
+
+/* api */
+async function api(payload){
+  try{
+    const r=await fetch('/api/study',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const t=await r.text();
+    try{return JSON.parse(t)}catch{return{error:r.status===413?'File bahut badi hai. Maximum 3MB.':'Server error ('+r.status+'). Dobara try karein.'}}
+  }catch(e){return{error:'Internet ya server ki dikkat. Dobara try karein.'}}
+}
+const foot='<div class="res-footer">Created by Ravi ❤️</div>';
+async function run(k,btn,payload,fmt){
+  const box=$('#r_'+k),doc=$('#d_'+k);
+  box.classList.add('show');
+  doc.innerHTML='<div class="loader"><div class="spin"></div><span>AI result bana raha hai, thoda wait karein...</span></div>';
+  const old=btn.textContent;btn.disabled=true;btn.textContent='⏳ Generate ho raha hai...';
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+  const d=await api(payload);
+  try{
+    if(d.error)throw new Error(d.error);
+    doc.innerHTML=`<div class="dhead"><b>📚 Study Helper</b><span>${TITLE[k]}</span></div>`+fmt(d)+foot;
+    doc.dataset.ready='1';
+  }catch(e){doc.innerHTML='<div class="msg">'+esc(e.message)+'</div>';delete doc.dataset.ready}
+  btn.disabled=false;btn.textContent=old;
+}
+const need=(v,m)=>{if(!v){alert(m);return false}return true};
+const go={
+  rm(b){
+    const days=$('#days').value,hours=$('#hours').value;
+    if(!need(days&&hours,'Din aur ghante daalna zaroori hai'))return;
+    const subjects=[...document.querySelectorAll('#subs .sr')].map(r=>({name:r.querySelector('.sn').value,chapters:r.querySelector('.sc').value}));
+    run('rm',b,{mode:'roadmap',name:$('#name').value.trim(),days,hours,subjects},d=>md(d.text));
+  },
+  fc(b){
+    if(!need(store.fc,'Pehle PDF upload karein'))return;
+    run('fc',b,{mode:'flashcards',pdf:store.fc,count:$('#cnt_fc').value,lang:$('#lang_fc').value},d=>{
+      if(!Array.isArray(d.cards)||!d.cards.length)throw new Error('Flashcards nahi ban paye. Dobara try karein.');
+      return '<div class="hint">👆 Answer dekhne ke liye card par tap karein</div>'+d.cards.map((c,i)=>`<div class="card" style="--i:${i}"><div class="q">❓ ${esc(c.q)}</div><div class="a">💡 ${esc(c.a)}</div></div>`).join('');
+    });
+  },
+  qz(b){
+    if(!need(store.qz,'Pehle PDF upload karein'))return;
+    run('qz',b,{mode:'qui
